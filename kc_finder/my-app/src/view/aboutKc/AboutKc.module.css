@@ -1,0 +1,41 @@
+.wrapper {
+  width: 100vw;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.container {
+  width: 62.5%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 9fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.menubox {
+  grid-column: 1 / 2;
+  width: 100%;
+}
+
+.box {
+  grid-column: 3 / 4;
+  display: grid;
+  gap: 24px;
+}
+
+.box h2 {
+  grid-column: 1 / -1;
+  text-align: left;
+  margin-bottom: 16px;
+  color: #000066;
+  font-size: 24px;
+}
+
+.abuotKc {
+  background-color: rgb(240, 240, 240);
+  height: 400px;
+}

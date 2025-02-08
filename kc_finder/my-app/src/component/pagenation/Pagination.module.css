@@ -1,0 +1,19 @@
+.pageButton {
+  padding: 6px 12px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #c0c0c0;
+  font-size: 15px;
+}
+
+.pageButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pageButton.active {
+  color: #000066;
+  font-weight: 700;
+}

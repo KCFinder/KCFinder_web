@@ -1,0 +1,103 @@
+.navWrapper {
+  width: 100vw;
+  margin: 0px;
+  height: 80px;
+  border-bottom: 0.5px solid #d0d0d0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 15px;
+  text-align: center;
+}
+
+.nav {
+  width: 62.5%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 6fr 1fr 2fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.navContent {
+  grid-column: 3 / 4;
+}
+
+.navContent ul {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  padding: 0px;
+  list-style: none;
+}
+
+.navContent ul li {
+  cursor: pointer;
+}
+
+.navContent ul li:hover {
+  font-weight: 600;
+}
+
+.navContent ul li.active {
+  font-weight: 600;
+  color: #007bff;
+}
+
+.logoSection {
+  grid-column: 1 / 2;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+}
+
+.logoSection img {
+  height: 40px;
+}
+
+.authSection {
+  grid-column: 5 / 6;
+  justify-self: end;
+}
+
+.authSection ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding: 0px;
+  list-style: none;
+}
+
+.authSection ul li {
+  cursor: pointer;
+}
+
+.authSection ul li:hover {
+  font-weight: 600;
+}
+
+.authSection button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.authSection button:hover {
+  color: rgb(0, 0, 0);
+}
+
+.mainMenu > li:hover .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.1s;
+}
+
+.dropdown {
+  position: absolute;
+  top: 78px; /* 80px - 2px */
+
+  background-color: red;
+}
