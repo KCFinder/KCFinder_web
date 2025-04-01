@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './Notice.module.css';
 import MenuBox from '../../component/menuBox';
 import Pagination from '../../component/pagenation';
-import noticeData from '../../constants/noticeData';
+import { noticeList } from '../../mock/noticeData.ts';
+import { useNavigate } from 'react-router';
 
 export default function Notice() {
   const path = '/notice';
   const title = '공지사항';
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
+
+  const sortedNoticeList = useMemo(() => {
+    return [...noticeList].sort((a, b) => {
+      // 날짜 비교 (내림차순)
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+  }, [noticeList]);
+
+  const totalPages = Math.ceil(noticeList.length / 10);
   const maxVisiblePages = 5;
+  const navigate = useNavigate();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleNoticeClick = (noticeId) => {
+    navigate(`/notice/${noticeId}`);
   };
 
   return (
@@ -31,11 +45,15 @@ export default function Notice() {
                 </tr>
               </thead>
               <tbody>
-                {noticeData.map((notice) => (
-                  <tr key={notice.id}>
-                    <td>{notice.id}</td>
-                    <td className={styles.noticeTitle}>{notice.title}</td>
-                    <td>{notice.date}</td>
+                {sortedNoticeList.map((notice) => (
+                  <tr
+                    key={notice.noticeId}
+                    onClick={() => handleNoticeClick(notice.noticeId)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <td>{notice.noticeId}</td>
+                    <td className={styles.noticeTitle}>{notice.noticeTitle}</td>
+                    <td>{notice.createdAt}</td>
                   </tr>
                 ))}
               </tbody>

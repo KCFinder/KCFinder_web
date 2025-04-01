@@ -17,7 +17,6 @@ export default function Nav() {
     navigate(item.path);
   };
 
-
   return (
     <>
       <div

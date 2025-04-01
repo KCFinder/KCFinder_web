@@ -13,6 +13,8 @@ export default function FindKc() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 5;
   const maxVisiblePages = 5;
+  
+  const [isServiceAvailable, setIsServiceAvailable] = useState(false);
 
   const uploadHistory = [
     {
@@ -59,6 +61,26 @@ export default function FindKc() {
   const handleLinkClick = () => {
     window.open(link, '_blank');
   };
+
+  if (!isServiceAvailable) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          <MenuBox className={styles.menubox} path={path} />
+          <div className={styles.box}>
+            <h2>{title}</h2>
+            <div className={styles.serviceUnavailable}>
+              <div className={styles.unavailableMessage}>
+                <h3>리뉴얼 중인 서비스입니다</h3>
+                <p>더 나은 서비스를 위해 준비 중입니다. 불편을 드려 죄송합니다.</p>
+                <p>빠른 시일 내에 새로운 모습으로 찾아뵙겠습니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrapper}>

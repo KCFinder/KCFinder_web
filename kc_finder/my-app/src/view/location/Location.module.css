@@ -23,8 +23,6 @@
 
 .box {
   grid-column: 3 / 4;
-  display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
 }
 
 .box h2 {
@@ -35,6 +33,33 @@
   font-size: 24px;
 }
 
+.locationMap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .locationInfo {
-  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  padding: 10px 0;
+  background-color: #ffffff;
+  border-top: 2px solid #000066;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.locationInfo span:first-child {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.locationInfo span:last-child {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
 }

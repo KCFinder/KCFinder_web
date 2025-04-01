@@ -14,21 +14,21 @@ export default function Footer() {
                   src={logo}
                   alt="KC Finder 로고"
                 />
-                <a href="/main">개인정보처리 방침</a>
-                <a href="/main">서비스이용약관</a>
+                {/* <a href="/main">개인정보처리 방침</a>
+                <a href="/main">서비스이용약관</a> */}
               </div>
             </li>
             <li>
               <span>
-                케이씨파인더 ㅣ 대표 : 홍길동 ㅣ 대표번호 : 051-000-0000
+              KCfinder ㅣ 대표 : 이현민 ㅣ 대표번호 : 010-3300-4698
                 <br />
-                부산광역시 부산진구 전포대로 000번길 | 사업자번호 : 000-00-000005 | 이메일 :
-                <a href="mailto:help@example.kr">
-                  help@example.kr
+                부산광역시 동구 초량동 1194-5 205호  | 이메일 : &nbsp;
+                <a href="mailto:yeonho4698@gmail.com">
+                yeonho4698@gmail.com
                 </a>
               </span>
               <span>
-                Copyright 2018 © Securenet All Rights Reserved.
+                Copyright 2025 © KCfinder All Rights Reserved.
               </span>
             </li>
           </ul>
