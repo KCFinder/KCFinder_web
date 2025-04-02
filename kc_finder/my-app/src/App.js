@@ -23,8 +23,9 @@ function App() {
       </header>
       <main className="main">
         <Routes>
+          <Route path="/" element={<Main />} />
           <Route path="/main" element={<Main />} />
-          
+
           <Route path="/auth/login" element={<Login />}></Route>
           <Route path="/auth/sign-up" element={<SignUp />}></Route>
 
@@ -32,7 +33,10 @@ function App() {
           <Route path="/introduction/location" element={<Location />}></Route>
 
           <Route path="/services" element={<AboutKc />}></Route>
-          <Route path="/services/same_equipment" element={<AboutSameEquipment />}></Route>
+          <Route
+            path="/services/same_equipment"
+            element={<AboutSameEquipment />}
+          ></Route>
           <Route path="/services/finder" element={<FindKc />}></Route>
           <Route path="/services/guide" element={<Guide />}></Route>
 
