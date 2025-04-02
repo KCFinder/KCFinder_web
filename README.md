@@ -1,2 +1,0 @@
-# kc-finder
-# kc-finder
