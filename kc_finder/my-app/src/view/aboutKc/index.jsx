@@ -15,7 +15,7 @@ export default function AboutKc() {
           <h2>{title}</h2>
           <div className={styles.content}>
             <div>
-              <img style={{ borderRadius: "15px" }} width={400} src={kc_img} alt="kc에 대한 이미지" />
+              <img style={{ borderRadius: "15px", width: "350px" }} src={kc_img} alt="kc에 대한 이미지" />
             </div>
             <div>
               <p>

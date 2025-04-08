@@ -14,7 +14,7 @@ export default function AboutSameEquipment() {
           <h2>{title}</h2>
           <div className={styles.content}>
             <div>
-              <img width={300} style={{ borderRadius: "15px" }} src={equipemnt_img} alt="동일 기자재에 대한 이미지" />
+              <img style={{ borderRadius: "15px", width: "400px" }} src={equipemnt_img} alt="동일 기자재에 대한 이미지" />
             </div>
             <div>
               <p>
