@@ -12,6 +12,8 @@ export default function Dropdown({ navContent, activeDropdown, setActiveDropdown
           onMouseLeave={() => setActiveDropdown(null)}>
 
           <div className={styles.dropdown}>
+            <div style={{ width: "150px", height: "40px" }}>
+            </div>
             <div className={styles.dropdownItems}>
               <ul>
                 {navContent.map((item) => (

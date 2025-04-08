@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import styles from './Notice.module.css';
 import MenuBox from '../../component/menuBox';
 import Pagination from '../../component/pagenation';
-import { noticeList } from '../../mock/noticeData.ts';
+import { noticeList } from '../../mock/noticeData.js';
 import { useNavigate } from 'react-router';
 
 export default function Notice() {
@@ -12,7 +12,6 @@ export default function Notice() {
 
   const sortedNoticeList = useMemo(() => {
     return [...noticeList].sort((a, b) => {
-      // 날짜 비교 (내림차순)
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
   }, [noticeList]);
