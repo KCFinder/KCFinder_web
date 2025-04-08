@@ -24,7 +24,7 @@
 .box {
   grid-column: 3 / 4;
   display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
+  grid-template-columns: 8fr 1fr 6fr;
 }
 
 .box h2 {
@@ -40,13 +40,24 @@
   text-align: left;
 }
 
-.boxText strong{
-  font-size: 20px;
+.boxText_title {
+  font-size: 24px;
+}
+
+.boxText_content p {
+  margin-bottom: 5px;
+}
+
+.boxText_content {
+  margin-top: 10px;
+  line-height: 1.6;
+  text-align: justify;
+  word-break: keep-all;
+  word-wrap: break-word;
 }
 
 .boxImg {
   grid-column: 3 / 4;
-  width: 384px;
   height: 437px;
 }
 
