@@ -7,7 +7,7 @@ import img from '../../asset/icon/img.svg';
 import phoneIcon from '../../asset/icon/phone-icon.svg';
 import emailIcon from '../../asset/icon/email_icon.svg';
 import arrow from '../../asset/icon/arrow.svg';
-import { noticeList } from '../../mock/noticeData.ts';
+import { noticeList } from '../../mock/noticeData.js';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -133,7 +133,7 @@ export default function Main() {
         </div>
         <div style={{fontWeight: "600", fontSize: "25px"}}>
         <br />
-        위 서비스는리뉴얼 중으로 카카오톡: KCfinder 또는 연락처, 이메일로 연락부탁드립니다.
+        위 서비스는리뉴얼 중으로 카카오톡: KC-Finder 또는 연락처, 이메일로 연락부탁드립니다.
         </div>
       </div>
 

@@ -43,4 +43,8 @@
   gap: 40px;
   justify-content: center;
   align-items: center;
+  text-align: justify;
+  word-break: keep-all;
+  word-wrap: break-word;
+  letter-spacing: -0.5px;
 }
