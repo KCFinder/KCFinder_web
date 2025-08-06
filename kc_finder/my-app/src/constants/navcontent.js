@@ -18,6 +18,11 @@ export const navContent = [
     ],
   },
   {
+    name: "나의 기자재",
+    path: "/my/finder",
+    dropdownItems: [{ name: "나의 기자재", path: "/my/finder" }],
+  },
+  {
     name: "공지사항",
     path: "/notice",
     dropdownItems: [{ name: "공지사항", path: "/notice" }],

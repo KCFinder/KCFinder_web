@@ -14,7 +14,7 @@ export default function FindKc() {
   const totalPages = 5;
   const maxVisiblePages = 5;
   
-  const [isServiceAvailable, setIsServiceAvailable] = useState(false);
+  const [isServiceAvailable, setIsServiceAvailable] = useState(true);
 
   const uploadHistory = [
     {

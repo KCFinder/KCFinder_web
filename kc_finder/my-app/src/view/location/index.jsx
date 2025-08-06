@@ -1,47 +1,80 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Location.module.css';
 import MenuBox from '../../component/menuBox';
+import location from '../../asset/img/location.jpg'
 import location_icon from '../../asset/icon/location.svg'
 
+// const NAVER_MAP_API = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=`;
+// const apiKey = process.env.REACT_APP_NAVER_API;
+
 export default function Location() {
-  const mapElement = useRef(null);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  // const [latLng, setLatLng] = useState(null);
+  // const [map, setMap] = useState(null);
 
-  useEffect(() => {
-    const apiKey = process.env.REACT_APP_NAVER_MAP_API_KEY;
+  // useEffect(() => {
+  //   setLatLng({
+  //     lat: 35.1524181,
+  //     lng: 129.0596052
+  //   });
+  // }, []);
 
-    const mapScript = document.createElement('script');
-    mapScript.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${apiKey}`;
-    mapScript.async = true;
+  // useEffect(() => {
+  //   if (!latLng) return;
 
-    mapScript.onload = () => {
-      setIsMapLoaded(true);
-    };
+  //   const loadMap = () => {
+  //     const script = document.createElement("script");
+  //     script.src = `${NAVER_MAP_API}${apiKey}&modules=geocoder`;
+  //     script.async = true;
 
-    document.head.appendChild(mapScript);
+  //     script.onload = () => {
+  //       console.log("Naver maps script loaded");
+  //       console.log("Window.naver:", window.naver);
 
-    return () => {
-      mapScript.onload = null;
-    };
-  }, []);
+  //       if (!window.naver || !window.naver.maps) {
+  //         console.error("네이버 지도 라이브러리 로드 실패");
+  //         return;
+  //       }
 
-  useEffect(() => {
-    if (isMapLoaded && window.naver && mapElement.current) {
-      const location = new window.naver.maps.LatLng(35.1182355805027, 129.042437247852);
+  //       try {
+  //         const newMap = new window.naver.maps.Map("map", {
+  //           center: new window.naver.maps.LatLng(latLng.lat, latLng.lng),
+  //           zoom: 25,
+  //           scaleControl: false,
+  //           logoControl: false,
+  //           mapDataControl: false,
+  //           zoomControl: true,
+  //           minZoom: 6,
+  //           zoomControlOptions: {
+  //             position: window.naver.maps.Position.TOP_RIGHT
+  //           },
+  //         });
 
-      const mapOptions = {
-        center: location,
-        zoom: 18
-      };
+  //         new window.naver.maps.Marker({
+  //           position: new window.naver.maps.LatLng(latLng.lat, latLng.lng),
+  //           map: newMap,
+  //         });
 
-      const map = new window.naver.maps.Map(mapElement.current, mapOptions);
+  //         setMap(newMap);
+  //       } catch (error) {
+  //         console.error("지도 생성 중 오류:", error);
+  //       }
+  //     };
 
-      const marker = new window.naver.maps.Marker({
-        map,
-        position: location,
-      });
-    }
-  }, [isMapLoaded]);
+  //     script.onerror = (error) => {
+  //       console.error("지도 스크립트 로드 실패", error);
+  //     };
+
+  //     document.head.appendChild(script);
+
+  //     return () => {
+  //       if (document.head.contains(script)) {
+  //         document.head.removeChild(script);
+  //       }
+  //     };
+  //   };
+
+  //   loadMap();
+  // }, [latLng, apiKey]);
 
   return (
     <div className={styles.wrapper}>
@@ -51,12 +84,24 @@ export default function Location() {
           <h2>오시는 길</h2>
           <div>
             <div>
-              <div ref={mapElement} style={{ width: '100%', height: '500px' }} />
+              <div className={styles.locationMap}>
+                <img style={{ width: '100%' }} src={location} alt="오시는 길" />
+              </div>
               <div className={styles.locationInfo}>
                 <span><img src={location_icon} width={30} alt="위치 아이콘" /></span>
                 <span>부산광역시 동구 초량동 1194-5 205호</span>
               </div>
             </div>
+
+            {/* <div className={styles.map}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "80vh" }}>
+                <div
+                  id="map"
+                  style={{ width: "1000px", height: "700px", borderRadius: "5px", backgroundColor: "#f5f5f5" }}
+                />
+              </div>
+            </div> */}
+
           </div>
         </div>
       </div>
