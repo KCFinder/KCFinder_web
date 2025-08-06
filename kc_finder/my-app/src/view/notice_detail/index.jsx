@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './NoticeDetail.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import { noticeList } from '../../mock/noticeData.js';
+import { noticeList } from '../../mock/noticeData.ts';
 import MenuBox from '../../component/menuBox';
-import parse from 'html-react-parser';
 
 export default function NoticeDetail() {
   const { id } = useParams();
@@ -50,7 +49,9 @@ export default function NoticeDetail() {
               </div>
             </div>
             <div className={styles.noticeContent}>
-              {parse(notice.noticeContent)}
+              {notice.noticeContent.split('\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
             <div className={styles.buttonWrapper}>
               <button
