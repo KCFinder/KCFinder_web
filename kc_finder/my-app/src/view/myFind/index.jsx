@@ -216,64 +216,63 @@ export default function FindKc() {
                 ) : matchingDataError ? (
                   <p>{matchingDataError}</p>
                 ) : matchingData && matchingData.length > 0 ? (
-                  matchingData.map((item, index) => (
-                    <div key={index} className={styles.result}>
-                      <ul>
-                        <li>
-                          <p><strong>내 제품<br/>이미지</strong></p>
-                          <div className={styles.imageAndButtonsContainer}> {/* ✨부모 컨테이너 추가 */}
-                            <button onClick={goToPreviousImage} className={styles.sliderButton}>&lt;</button> {/* ✨클래스명 수정 */}
-                            <div className={styles.imageContainer}> {/* ✨이미지만 감싸는 컨테이너 추가 */}
-                              {selectedProduct && selectedProduct.userProductImgPaths.length > 0 && (
-                                <img 
-                                  src={selectedProduct.userProductImgPaths[currentImageIndex]} 
-                                  alt={selectedProduct.userProductName} 
-                                  className={styles.productMainImage}
-                                />
-                              )}
-                            </div>
-                            <button onClick={goToNextImage} className={styles.sliderButton}>&gt;</button> {/* ✨클래스명 수정 */}
-                          </div>
-                        </li>
-                        <li>
-                          <p><strong>매칭 제품<br/>이미지</strong></p>
-                          <div className={styles.imageAndButtonsContainer}>
-                            <button onClick={goToPreviousMatchingImage} className={styles.sliderButton}>&lt;</button>
-                            <div className={styles.imageContainer}>
-                              {/* ✨ matchingData 배열의 현재 인덱스에 해당하는 이미지를 표시 */}
-                              {matchingData && matchingData.length > 0 && (
-                                <a href={matchingData[currentMatchingImageIndex].matchingKcImgUrl} target="_blank" rel="noopener noreferrer">
-                                  <img
-                                    src={matchingData[currentMatchingImageIndex].matchingKcImgUrl}
-                                    alt="유사 제품 이미지"
-                                    className={styles.productMainImage}
-                                  />
-                                </a>
-                              )}
-                            </div>
-                            <button onClick={goToNextMatchingImage} className={styles.sliderButton}>&gt;</button>
-                          </div>
-                        </li>
-                        <li>
-                          <p><strong>인증번호</strong></p>
-                          <div>
-                            <span>{item.kcCertificationNum}</span>
-                          </div>
-                        </li>
-                        <li>
-                          <p><strong>링크</strong></p>
-                          <div className={styles.linkBox}>
-                            <span>{item.matchingProductLink}</span>
-                          </div>
-                          <div>
-                            <button onClick={() => handleLinkClick(item.matchingProductLink)} className={styles.goToLinkBtn}>
-                              바로가기
-                            </button>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  ))
+                <div className={styles.result}>
+                  <ul>
+                    <li>
+                      <p><strong>내 제품<br/>이미지</strong></p>
+                      <div className={styles.imageAndButtonsContainer}>
+                        <button onClick={goToPreviousImage} className={styles.sliderButton}>&lt;</button>
+                        <div className={styles.imageContainer}>
+                          {selectedProduct && selectedProduct.userProductImgPaths.length > 0 && (
+                            <img 
+                              src={selectedProduct.userProductImgPaths[currentImageIndex]} 
+                              alt={selectedProduct.userProductName} 
+                              className={styles.productMainImage}
+                            />
+                          )}
+                        </div>
+                        <button onClick={goToNextImage} className={styles.sliderButton}>&gt;</button>
+                      </div>
+                    </li>
+                    <li>
+                      <p><strong>매칭 제품<br/>이미지</strong></p>
+                      <div className={styles.imageAndButtonsContainer}>
+                        <button onClick={goToPreviousMatchingImage} className={styles.sliderButton}>&lt;</button>
+                        <div className={styles.imageContainer}>
+                          {/* ✨ matchingData 배열의 현재 인덱스에 해당하는 이미지를 표시 */}
+                          <a href={matchingData[currentMatchingImageIndex].matchingKcImgUrl} target="_blank" rel="noopener noreferrer">
+                            <img
+                              src={matchingData[currentMatchingImageIndex].matchingKcImgUrl}
+                              alt="유사 제품 이미지"
+                              className={styles.productMainImage}
+                            />
+                          </a>
+                        </div>
+                        <button onClick={goToNextMatchingImage} className={styles.sliderButton}>&gt;</button>
+                      </div>
+                    </li>
+                    <li>
+                      <p><strong>인증번호</strong></p>
+                      <div>
+                        {/* ✨ 현재 인덱스에 맞는 데이터 표시 */}
+                        <span>{matchingData[currentMatchingImageIndex].kcCertificationNum}</span>
+                      </div>
+                    </li>
+                    <li>
+                      <p><strong>링크</strong></p>
+                      <div className={styles.linkBox}>
+                        {/* ✨ 현재 인덱스에 맞는 데이터 표시 */}
+                        <span>{matchingData[currentMatchingImageIndex].matchingProductLink}</span>
+                      </div>
+                      <div>
+                        {/* ✨ 현재 인덱스에 맞는 데이터 표시 */}
+                        <button onClick={() => handleLinkClick(matchingData[currentMatchingImageIndex].matchingProductLink)} className={styles.goToLinkBtn}>
+                          바로가기
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
                 ) : (
                   <p>매칭된 제품 정보가 없습니다.</p>
                 )}
