@@ -1,36 +1,53 @@
 // src/context/AuthContext.js
 
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 // 1. AuthContext 생성
 const AuthContext = createContext();
 
 // 2. AuthProvider 컴포넌트 구현
 export const AuthProvider = ({ children }) => {
-    // 상태는 초기값으로 설정됩니다. 새로고침하면 이 값들로 돌아갑니다.
-    const [user, setUser] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(false);
+    // 상태 초기화 시 로컬 스토리지에서 사용자 정보 불러오기
+    const [user, setUser] = useState(() => {
+        const savedUser = localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
 
-    // 새로고침 시 로그인 상태를 복원하는 로직이 필요 없으므로 useEffect 훅을 제거합니다.
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        return !!localStorage.getItem('user');
+    });
 
-    // 로그인 함수: 사용자 정보만 받아 상태를 업데이트합니다.
+    // 로그인 함수: 사용자 정보를 받아 상태 업데이트 후 로컬 스토리지에 저장
     const login = (userData) => {
-        // 로컬 스토리지에 토큰을 저장하는 로직이 필요 없습니다.
         setUser(userData);
         setIsAuthenticated(true);
+        localStorage.setItem('user', JSON.stringify(userData));
     };
 
-    // 로그아웃 함수: 상태를 초기화합니다.
+    // 로그아웃 함수: 상태 초기화 후 로컬 스토리지에서 삭제
     const logout = () => {
-        // 로컬 스토리지에서 토큰을 삭제하는 로직이 필요 없습니다.
         setUser(null);
         setIsAuthenticated(false);
+        localStorage.removeItem('user');
     };
+
+    // user 또는 isAuthenticated 상태가 변경될 때마다 로컬 스토리지에 동기화
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            setIsAuthenticated(true);
+        } else {
+            localStorage.removeItem('user');
+            setIsAuthenticated(false);
+        }
+    }, [user]);
+    
+    // 이 예시에서는 loading 상태를 사용하지 않으므로 제거합니다.
+    // 만약 로그인 확인 로직이 비동기라면 loading 상태가 필요할 수 있습니다.
 
     // value에 login과 logout 함수를 포함시킵니다.
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, loading, login, logout }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

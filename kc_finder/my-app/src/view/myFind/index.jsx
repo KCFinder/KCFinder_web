@@ -24,6 +24,10 @@ export default function FindKc() {
   const [loadingMatchingData, setLoadingMatchingData] = useState(false);
   const [matchingDataError, setMatchingDataError] = useState(null);
 
+  // 3. ✨추가된 상태: 현재 보이는 이미지의 인덱스
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentMatchingImageIndex, setCurrentMatchingImageIndex] = useState(0);
+
   // 로그인 상태 확인 및 사용자 제품 목록 불러오기
   useEffect(() => {
     if (!isAuthenticated) {
@@ -36,7 +40,6 @@ export default function FindKc() {
         setLoadingUserProducts(true);
         if (user && user.data) {
           const response = await axios.get(`${API_BASE_URL}/api/product/matching/${user.data}`);
-          console.log(response.data.data);
           if (Array.isArray(response.data.data)) {
             // productCode를 기준으로 데이터를 그룹화
             const groupedProducts = response.data.data.reduce((acc, current) => {
@@ -54,7 +57,7 @@ export default function FindKc() {
 
             setUserProducts(groupedProducts);
 
-            const firstProductCode = response.data.data[0].userProductCode;
+            const firstProductCode = response.data.data[0]?.userProductCode;
             if (firstProductCode) {
               setSelectedProductCode(Number(firstProductCode));
             }
@@ -81,13 +84,9 @@ export default function FindKc() {
 
       try {
         setLoadingMatchingData(true);
-        console.log("제품코드"+selectedProductCode);
-        console.log("유저코드"+user.data);
-        // 백엔드 엔드포인트는 예시입니다. 실제 구현에 맞게 수정하세요.
         const response = await axios.get(`${API_BASE_URL}/api/product/matching/${user.data}/${selectedProductCode}`);
         setMatchingData(response.data.data);
-        console.log("매칭데이터");
-        console.log(response.data.data);
+        setCurrentMatchingImageIndex(0);
       } catch (err) {
         console.error('매칭 제품 정보 요청 실패:', err);
         setMatchingDataError('매칭 제품 정보를 불러오는 데 실패했습니다.');
@@ -95,7 +94,6 @@ export default function FindKc() {
         setLoadingMatchingData(false);
       }
     };
-
     fetchMatchingData();
   }, [selectedProductCode, user]);
 
@@ -105,10 +103,53 @@ export default function FindKc() {
 
   const handleProductSelect = (productCode) => {
     setSelectedProductCode(productCode);
-    setMatchingData(null); // 새로운 제품 선택 시 기존 데이터 초기화
+    setMatchingData(null);
+    setCurrentImageIndex(0);
+    setCurrentMatchingImageIndex(0);
   };
 
-  // 로딩 상태 처리
+  // ✨이전 이미지로 이동하는 함수
+  const goToPreviousImage = () => {
+    const selectedProduct = userProducts[selectedProductCode];
+    if (selectedProduct && selectedProduct.userProductImgPaths.length > 1) {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex - 1 + selectedProduct.userProductImgPaths.length) % selectedProduct.userProductImgPaths.length
+      );
+    }
+  };
+
+  // ✨다음 이미지로 이동하는 함수
+  const goToNextImage = () => {
+    const selectedProduct = userProducts[selectedProductCode];
+    if (selectedProduct && selectedProduct.userProductImgPaths.length > 1) {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % selectedProduct.userProductImgPaths.length
+      );
+    }
+  };
+
+    // ✨이전 매칭 이미지로 이동하는 함수
+  const goToPreviousMatchingImage = () => {
+    if (matchingData && matchingData.length > 1) {
+      setCurrentMatchingImageIndex((prevIndex) => 
+        (prevIndex - 1 + matchingData.length) % matchingData.length
+      );
+    }
+  };
+
+  // ✨다음 매칭 이미지로 이동하는 함수
+  const goToNextMatchingImage = () => {
+    if (matchingData && matchingData.length > 1) {
+      setCurrentMatchingImageIndex((prevIndex) => 
+        (prevIndex + 1) % matchingData.length
+      );
+    }
+  };
+
+  const userProductList = Object.values(userProducts);
+  const selectedProduct = userProducts[selectedProductCode];
+
+  // 로딩 및 에러 상태 처리
   if (loadingUserProducts) {
     return (
         <div className={styles.wrapper}>
@@ -125,8 +166,6 @@ export default function FindKc() {
     );
   }
 
-  // 사용자 제품 목록이 없을 때
-  const userProductList = Object.values(userProducts);
   if (userProductsError || userProductList.length === 0) {
     return (
         <div className={styles.wrapper}>
@@ -153,82 +192,90 @@ export default function FindKc() {
 
             <div className={styles.contentWrapper}>
               {/* 왼쪽: 내 제품 목록 */}
-              {/*<div className={styles.userProductList}>*/}
-              {/*  <h3>내 제품 목록</h3>*/}
-              {/*  {userProductList.map((product) => (*/}
-              {/*      <div*/}
-              {/*          key={product.userProductCode}*/}
-              {/*          className={`${styles.userProductItem} ${selectedProductCode === product.userProductCode ? styles.selected : ''}`}*/}
-              {/*          onClick={() => handleProductSelect(product.userProductCode)}*/}
-              {/*      >*/}
-              {/*        <div className={styles.userProductImageContainer}>*/}
-              {/*          {product.userProductImgPaths.map((path, imgIndex) => (*/}
-              {/*              <img key={imgIndex} src={path} alt={product.userProductName}*/}
-              {/*                   className={styles.productThumbnail}/>*/}
-              {/*          ))}*/}
-              {/*        </div>*/}
-              {/*      </div>*/}
-              {/*  ))}*/}
-              {/*</div>*/}
+              {/* <div className={styles.userProductList}>
+                <h3>내 제품 목록</h3>
+                {userProductList.map((product) => (
+                  <div
+                    key={product.userProductCode}
+                    className={`${styles.userProductItem} ${selectedProductCode === product.userProductCode ? styles.selected : ''}`}
+                    onClick={() => handleProductSelect(product.userProductCode)}
+                  >
+                    <p>{product.userProductName}</p>
+                    <div className={styles.userProductImageContainer}>
+                      <img src={product.userProductImgPaths[0]} alt={product.userProductName} className={styles.productThumbnail} />
+                    </div>
+                  </div>
+                ))}
+              </div> */}
 
               {/* 오른쪽: 매칭 결과 */}
               <div className={styles.matchingResultBox}>
-                {/*<h3>매칭 결과</h3>*/}
+                <h3>매칭 결과</h3>
                 {loadingMatchingData ? (
-                    <p>매칭 데이터를 불러오는 중입니다...</p>
+                  <p>매칭 데이터를 불러오는 중입니다...</p>
                 ) : matchingDataError ? (
-                    <p>{matchingDataError}</p>
+                  <p>{matchingDataError}</p>
                 ) : matchingData && matchingData.length > 0 ? (
-                    matchingData.map((item, index) => (
-                        <div key={index} className={styles.result}>
-                          <ul>
-                            <li>
-                              <p><strong>내 제품</strong></p>
-                              {userProductList.map((product) => (
-                                  <div
-                                      key={product.userProductCode}
-                                      className={`${styles.userProductItem} ${selectedProductCode === product.userProductCode ? styles.selected : ''}`}
-                                      onClick={() => handleProductSelect(product.userProductCode)}
-                                  >
-                                    <div className={styles.userProductImageContainer}>
-                                      {product.userProductImgPaths.map((path, imgIndex) => (
-                                          <img key={imgIndex} src={path} alt={product.userProductName}
-                                               className={styles.productThumbnail}/>
-                                      ))}
-                                    </div>
-                                  </div>
-                              ))}
-                            </li>
-                            <li>
-                              <p><strong>제품<br/>이미지</strong></p>
-                              <div className={styles.myImg}>
-                                <a href={item.matchingKcImgUrl} target="_blank" rel="noopener noreferrer">
-                                  <img src={item.matchingKcImgUrl} alt="유사 제품 이미지"/>
+                  matchingData.map((item, index) => (
+                    <div key={index} className={styles.result}>
+                      <ul>
+                        <li>
+                          <p><strong>내 제품<br/>이미지</strong></p>
+                          <div className={styles.imageAndButtonsContainer}> {/* ✨부모 컨테이너 추가 */}
+                            <button onClick={goToPreviousImage} className={styles.sliderButton}>&lt;</button> {/* ✨클래스명 수정 */}
+                            <div className={styles.imageContainer}> {/* ✨이미지만 감싸는 컨테이너 추가 */}
+                              {selectedProduct && selectedProduct.userProductImgPaths.length > 0 && (
+                                <img 
+                                  src={selectedProduct.userProductImgPaths[currentImageIndex]} 
+                                  alt={selectedProduct.userProductName} 
+                                  className={styles.productMainImage}
+                                />
+                              )}
+                            </div>
+                            <button onClick={goToNextImage} className={styles.sliderButton}>&gt;</button> {/* ✨클래스명 수정 */}
+                          </div>
+                        </li>
+                        <li>
+                          <p><strong>매칭 제품<br/>이미지</strong></p>
+                          <div className={styles.imageAndButtonsContainer}>
+                            <button onClick={goToPreviousMatchingImage} className={styles.sliderButton}>&lt;</button>
+                            <div className={styles.imageContainer}>
+                              {/* ✨ matchingData 배열의 현재 인덱스에 해당하는 이미지를 표시 */}
+                              {matchingData && matchingData.length > 0 && (
+                                <a href={matchingData[currentMatchingImageIndex].matchingKcImgUrl} target="_blank" rel="noopener noreferrer">
+                                  <img
+                                    src={matchingData[currentMatchingImageIndex].matchingKcImgUrl}
+                                    alt="유사 제품 이미지"
+                                    className={styles.productMainImage}
+                                  />
                                 </a>
-                              </div>
-                            </li>
-                            <li>
-                              <p><strong>인증번호</strong></p>
-                              <div>
-                                <span>{item.kcCertificationNum}</span>
-                              </div>
-                            </li>
-                            <li>
-                              <p><strong>링크</strong></p>
-                              <div className={styles.linkBox}>
-                                <span>{item.matchingProductLink}</span>
-                              </div>
-                              <div>
-                                <button onClick={() => handleLinkClick(item.matchingProductLink)} className={styles.goToLinkBtn}>
-                                  링크 바로가기
-                                </button>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                    ))
+                              )}
+                            </div>
+                            <button onClick={goToNextMatchingImage} className={styles.sliderButton}>&gt;</button>
+                          </div>
+                        </li>
+                        <li>
+                          <p><strong>인증번호</strong></p>
+                          <div>
+                            <span>{item.kcCertificationNum}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <p><strong>링크</strong></p>
+                          <div className={styles.linkBox}>
+                            <span>{item.matchingProductLink}</span>
+                          </div>
+                          <div>
+                            <button onClick={() => handleLinkClick(item.matchingProductLink)} className={styles.goToLinkBtn}>
+                              바로가기
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  ))
                 ) : (
-                    <p>매칭된 제품 정보가 없습니다.</p>
+                  <p>매칭된 제품 정보가 없습니다.</p>
                 )}
               </div>
             </div>
