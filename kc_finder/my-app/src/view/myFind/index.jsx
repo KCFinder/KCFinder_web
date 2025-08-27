@@ -6,9 +6,17 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { API_BASE_URL } from '../../apiConfig';
 
+import Pagination from '../../component/pagenation';
+import img01 from '../../asset/example/example01.jpg';
+import img02 from '../../asset/example/example02.jpg';
+
+
 export default function FindKc() {
   const path = '/my';
   const title = '나의 동일기자재 찾기';
+
+  const totalPages = 5;
+  const maxVisiblePages = 5;
 
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
@@ -27,6 +35,50 @@ export default function FindKc() {
   // 3. ✨추가된 상태: 현재 보이는 이미지의 인덱스
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentMatchingImageIndex, setCurrentMatchingImageIndex] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const uploadHistory = [
+    {
+      id: 5,
+      uploadDate: '2024.02.15',
+      image: img01,
+      certNumber: 'CB015R1633-3005',
+      result: '매칭 성공'
+    },
+    {
+      id: 4,
+      uploadDate: '2024.02.14',
+      image: img02,
+      certNumber: 'CB015R1633-3004',
+      result: '매칭 성공'
+    },
+    {
+      id: 3,
+      uploadDate: '2024.02.14',
+      image: img01,
+      certNumber: 'CB015R1633-3003',
+      result: '매칭 실패'
+    },
+    {
+      id: 2,
+      uploadDate: '2024.02.13',
+      image: img02,
+      certNumber: 'CB015R1633-3002',
+      result: '매칭 성공'
+    },
+    {
+      id: 1,
+      uploadDate: '2024.02.13',
+      image: img01,
+      certNumber: 'CB015R1633-3001',
+      result: '매칭 실패'
+    }
+  ].sort((a, b) => b.id - a.id);
 
   // 로그인 상태 확인 및 사용자 제품 목록 불러오기
   useEffect(() => {
@@ -146,6 +198,23 @@ export default function FindKc() {
     }
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   const userProductList = Object.values(userProducts);
   const selectedProduct = userProducts[selectedProductCode];
 
@@ -277,6 +346,42 @@ export default function FindKc() {
                   <p>매칭된 제품 정보가 없습니다.</p>
                 )}
               </div>
+
+              <div className={styles.box}>
+                <h2>나의 제품 업로드 이력 목록</h2>
+                <table className={styles.historyTable}>
+                  <thead>
+                    <tr>
+                      <th>순번</th>
+                      <th>업로드 이미지</th>
+                      <th>인증번호</th>
+                      <th>등록일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {uploadHistory.map((item) => (
+                      <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td className={styles.uploadedImg}>
+                          <img src={item.image} alt={`업로드된 이미지 ${item.id}`} />
+                        </td>
+                        <td className={styles.historyTitle}>{item.certNumber}</td>
+                        <td>{item.uploadDate}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className={styles.historyPagination}>
+
+                  <Pagination
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                    maxVisiblePages={maxVisiblePages}
+                  />
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
