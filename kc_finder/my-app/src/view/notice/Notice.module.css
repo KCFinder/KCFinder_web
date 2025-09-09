@@ -1,0 +1,96 @@
+.wrapper {
+  width: 100vw;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.container {
+  width: 62.5%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 9fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.menubox {
+  grid-column: 1 / 2;
+  width: 100%;
+}
+
+.box {
+  grid-column: 3 / 4;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.box h2 {
+  grid-column: 1 / -1;
+  text-align: left;
+  margin-bottom: 16px;
+  color: #000066;
+  font-size: 24px;
+}
+
+.noticeList {
+  width: 100%;
+}
+
+.noticeTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.noticeTable th {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-top: 2px solid #000066;
+  border-bottom: 1px solid #dee2e6;
+  text-align: center;
+  font-weight: 600;
+  color: #000066;
+}
+
+.noticeTable td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #dee2e6;
+  text-align: center;
+}
+
+.noticeTable th:nth-child(1) {
+  width: 10%;
+}
+
+.noticeTable th:nth-child(2) {
+  width: 60%;
+}
+
+.noticeTable th:nth-child(3) {
+  width: 15%;
+}
+
+.noticeTable th:nth-child(4) {
+  width: 15%;
+}
+
+.noticeTitle {
+  text-align: left !important;
+  cursor: pointer;
+}
+
+.noticeTitle:hover {
+  text-decoration: underline;
+  color: #000066;
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 72px;
+}
