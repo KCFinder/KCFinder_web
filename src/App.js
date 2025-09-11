@@ -1,10 +1,36 @@
+import Login from './view/Login';
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Main from './view/Main';
+import SignUp from './view/SignUp';
+import GlobalLayout from './layout/GlobalLayout';
+import Services from './view/Services';
+import Introduction from './view/Introduction';
+import Location from './view/Location';
+import SameEquipment from './view/SameEquipment';
+import FindKc from './view/FindKc';
+import MyKc from './view/MyKc';
+import Notice from './view/Notice';
+import Guide from './view/Guide';
+
 export default function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <h1 className="text-4xl font-extrabold text-red-500">
-        Tailwind v4 Test
-      </h1>
-    </div>
+    <AuthProvider>
+      <GlobalLayout>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/main' element={<Main />} />
+          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/services' element={<Services />} />
+          <Route path='/introduction' element={<Introduction />} />
+          <Route path='/introduction/location' element={<Location />} />
+          <Route path='/services/same_equipment' element={<SameEquipment />} />
+          <Route path='/services/finder' element={<FindKc />} />
+          <Route path='/my/finder' element={<MyKc />} />
+          <Route path='/notice' element={<Notice />} />
+          <Route path='/services/guide' element={<Guide />} />
+        </Routes>
+      </GlobalLayout>
+    </AuthProvider>
   );
 }
-
