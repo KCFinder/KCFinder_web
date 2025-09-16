@@ -12,14 +12,16 @@ import FindKc from './view/FindKc';
 import MyKc from './view/MyKc';
 import Notice from './view/Notice';
 import Guide from './view/Guide';
+import Header from './layout/header/Header';
 
 export default function App() {
   return (
     <AuthProvider>
+      <Header />
       <GlobalLayout>
         <Routes>
           <Route path='/login' element={<Login />} />
-          <Route path='/main' element={<Main />} />
+          <Route path='/' element={<Main />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/services' element={<Services />} />
           <Route path='/introduction' element={<Introduction />} />

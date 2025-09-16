@@ -17,7 +17,7 @@ export default function Services() {
               alt='회사 이미지지'
               className='md:w-[384px] md:h-[437px] w-full h-[200px] object-cover rounded-2xl'
             />
-            <div className='max-w-[450px] pt-10 lg:pt-0 text-lg'>
+            <div className='max-w-[450px] lg:pt-0 text-sm md:text-xl'>
               <strong>KC 인증(Korea Certification, 국가통합인증마크)</strong>은
               대한민국에서 소비자의 안전을 보장하고,
               <br />

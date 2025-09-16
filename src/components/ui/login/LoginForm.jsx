@@ -43,7 +43,7 @@ export default function LoginForm() {
       login(user);
 
       alert('로그인에 성공했습니다!');
-      navigate('/main');
+      navigate('/');
     } catch (error) {
       console.error('로그인 실패:', error);
       if (error.response) {

@@ -30,7 +30,7 @@ export default function MenuBox({ menuType }) {
       <div className='bg-white border border-gray-500'>
         <Link
           to={currentMenu.path}
-          className='block px-4 py-4 bg-primary-200 text-center text-white font-semibold hover:bg-gray-50 transition-colors text-xl'
+          className='block px-4 py-4 bg-primary-200 text-center text-white font-semibold transition-colors text-xl'
         >
           {currentMenu.name}
         </Link>

@@ -47,7 +47,7 @@ export default function Pagination({ totalPage }) {
                 handleChangePage(Math.max(1, currentGroup * GROUP_SIZE))
               }
             >
-              <RightChevron className='transform rotate-180' />
+              <RightChevron className='transform rotate-180 bg-primary-200 w-6 h-6' />
             </button>
           </li>
         )}
@@ -70,7 +70,7 @@ export default function Pagination({ totalPage }) {
               type='button'
               className={`flex items-center justify-center font-medium ${
                 currentPage === page
-                  ? ' text-primary-200 px-2'
+                  ? ' text-red-500 px-2'
                   : 'bg-white text-gray-800 hover:text-primary-200 px-2'
               }`}
               onClick={() => handleChangePage(page)}

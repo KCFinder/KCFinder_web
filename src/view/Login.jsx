@@ -4,8 +4,15 @@ import SectionWrapper from '../wrapper/SectionWrapper';
 import MenuBox from '../components/ui/MenuBox';
 import PageHeader from '../components/ui/PageHeader';
 import ContentsWrapper from '../wrapper/ContentsWrapper';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    navigate('/sign-up');
+  };
+
   return (
     <SectionWrapper>
       <div className='flex'>
@@ -15,7 +22,10 @@ export default function Login() {
             <PageHeader title='로그인' />
             <LoginForm />
             <SnsLoginButton />
-            <button className='w-full py-3 text-white bg-primary-100 rounded-md  mt-5'>
+            <button
+              onClick={handleSignUp}
+              className='w-full py-3 text-white bg-primary-100 rounded-md  mt-5'
+            >
               회원가입
             </button>
           </div>

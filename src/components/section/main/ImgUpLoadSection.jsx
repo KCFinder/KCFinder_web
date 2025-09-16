@@ -91,7 +91,7 @@ export default function ImgUpLoadSection() {
           ref={fileInputRef}
           type='file'
           multiple
-          accept='image/jpeg,image/png'
+          accept='image/jpeg,image/png,image/webp'
           onChange={e => handleFiles(Array.from(e.target.files))}
           className='hidden'
         />

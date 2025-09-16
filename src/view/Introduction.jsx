@@ -13,11 +13,11 @@ export default function Introduction() {
           <PageHeader title='회사소개' />
           <div className='flex flex-col md:flex-row gap-10 justify-between w-full'>
             <div className='max-w-[450px] pb-10 md:pb-0'>
-              <p className='text-xl font-bold mb-4 text-left'>
+              <p className='text-sm md:text-xl font-bold mb-4 text-left'>
                 ㈜케이씨파인더는 산업용 기자재의 이미지 인식 및 분류에 특화된 AI
                 기술 기업입니다.
               </p>
-              <p>
+              <p className='text-sm md:text-xl'>
                 2020년 설립 이후, 당사는 제조업 현장의 디지털 전환을 선도하며
                 산업 현장의 효율성과 정확성을 혁신적으로 향상시키고 있습니다.
                 <br />

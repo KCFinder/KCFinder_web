@@ -8,8 +8,9 @@ module.exports = {
           100: '#214268',
           200: '#000066',
         },
+
         gray: {
-          50: '#7A7575', 
+          50: '#7A7575',
           100: '#f9f9f9',
           200: '#f5f5f5',
           300: '#eeeeee',
@@ -21,16 +22,16 @@ module.exports = {
           900: '#292929',
         },
         black: {
+          50: '#000000',
           100: '#332819',
         },
         yellow: {
           100: '#FEE500',
         },
         secondary: {
-          100: '#F6E3E0',
+          100: '#B5CAE3',
           200: '#96ADD7',
-        }
-    
+        },
       },
       fontFamily: {
         pretendard: ['Pretendard', 'ui-sans-serif', 'system-ui'],

@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import navContent from '../../constants/navcontent';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import X from '../../asset/icon/X';
 
-export default function MobileMenu({ menuType, isOpen, onClose }) {
+export default function MobileMenu({ isOpen, onClose }) {
   const [expandedMenu, setExpandedMenu] = useState(null);
+  const navigate = useNavigate();
 
-  console.log('MobileMenu 렌더링:', { menuType, isOpen });
+  const { isAuthenticated, user, logout } = useAuth();
 
   if (!isOpen) {
-    console.log('MobileMenu 렌더링 안됨 - isOpen이 false');
     return null;
   }
 
@@ -21,36 +24,59 @@ export default function MobileMenu({ menuType, isOpen, onClose }) {
     onClose();
   };
 
+  const handleLogin = () => {
+    navigate('/login');
+    onClose();
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+    onClose();
+  };
+
   return (
     <div
-      className='fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm'
+      className='fixed inset-0 z-[9999] w-full bg-black-50/50'
       onClick={onClose}
     >
+      <button
+        onClick={onClose}
+        className='absolute top-4 left-10 z-[10000] rounded-full transition-colors bg-white hover:bg-white p-2 shadow-lg'
+      >
+        <X />
+      </button>
+
       <div
         className='absolute top-0 right-0 w-80 h-full bg-white shadow-2xl'
         onClick={e => e.stopPropagation()}
       >
-        {/* 메뉴 헤더 */}
-        <div className='flex items-center justify-between p-4 border-b border-gray-200 '>
-          <h2 className='text-lg font-semibold text-gray-800'>메뉴</h2>
-          <button
-            onClick={onClose}
-            className='p-2  rounded-full transition-colors'
-          >
-            <svg
-              className='w-6 h-6 text-gray-600'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M6 18L18 6M6 6l12 12'
-              />
-            </svg>
-          </button>
+        <div className='flex items-center justify-between p-4 border-b border-gray-200 bg-primary-100'>
+          {isAuthenticated ? (
+            <>
+              <h2 className='text-lg font-semibold text-white'>
+                {user.name}회원님 안녕하세요!
+              </h2>
+              <button
+                className='text-sm text-white underline'
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <>
+              <h2 className='text-lg font-semibold text-white '>
+                로그인이 필요합니다
+              </h2>
+              <button
+                className='text-sm text-white underline'
+                onClick={handleLogin}
+              >
+                로그인
+              </button>
+            </>
+          )}
         </div>
 
         {/* 모든 메뉴 표시 */}

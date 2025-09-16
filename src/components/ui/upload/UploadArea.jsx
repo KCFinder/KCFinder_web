@@ -16,7 +16,7 @@ export default function UploadArea({
     <div
       className={cn(
         'flex items-center justify-center',
-        'border-dashed border-2 border-gray-300 rounded-2xl',
+        'border-dashed border-2 border-gray-400 rounded-2xl',
         'w-full max-w-[996px] h-[300px] mx-auto',
         isDragging && 'border-primary-100 bg-primary-50',
         loading && 'opacity-50',
@@ -42,7 +42,7 @@ export default function UploadArea({
         ) : (
           <>
             <Image />
-            <p>500KB이하의 jpg, png 파일만 등록 할 수 있습니다.</p>
+            <p>jpg, png, webp형식의 파일을 등록 해주세요.</p>
             <button
               onClick={onFileButtonClick}
               className='border border-gray-400 text-sm py-2 px-10 font-bold text-gray-500 rounded-full'

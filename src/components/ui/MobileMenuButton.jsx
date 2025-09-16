@@ -17,7 +17,7 @@ export default function MobileMenuButton({ className, menuType = 'main' }) {
 
   return (
     <>
-      <button className={cn('md:hidden px-4', className)} onClick={handleOpen}>
+      <button className={cn('md:hidden px-5', className)} onClick={handleOpen}>
         <Hambuger />
       </button>
 

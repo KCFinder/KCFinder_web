@@ -39,8 +39,8 @@ export const useImageUpload = () => {
     const tempFirebaseUrls = [];
 
     for (const file of files) {
-      if (!['image/jpeg', 'image/png'].includes(file.type)) {
-        alert('jpg 또는 png 파일만 업로드 가능합니다.');
+      if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+        alert('jpg, png, webp 파일만 업로드 가능합니다.');
         setLoading(false);
         return;
       }
