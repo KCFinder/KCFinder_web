@@ -1,7 +1,29 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../../ui/PageHeader';
 
 export default function ResultSection({ selectedItem }) {
+  const [mainRequestImage, setMainRequestImage] = useState(null);
+  const [mainMatchingImage, setMainMatchingImage] = useState(null);
+
+  useEffect(() => {
+    if (selectedItem?.productImgPath?.length > 0) {
+      setMainRequestImage(selectedItem.productImgPath[0]);
+    } else {
+      setMainRequestImage(null);
+    }
+
+    if (selectedItem?.matchingKcImgUrl) {
+      if (Array.isArray(selectedItem.matchingKcImgUrl)) {
+        setMainMatchingImage(selectedItem.matchingKcImgUrl[0]);
+      } else {
+        setMainMatchingImage(selectedItem.matchingKcImgUrl);
+      }
+    } else {
+      setMainMatchingImage(null);
+    }
+  }, [selectedItem]);
+
   if (!selectedItem) {
     return (
       <>
@@ -26,79 +48,81 @@ export default function ResultSection({ selectedItem }) {
           다른 이미지로 검색하기
         </Link>
       </div>
-      <div className='mb-10'>
-        <div className='flex gap-10 border-blue-50 items-center border-4 rounded-2xl p-4 relative mb-10'>
-          <p className='bg-white p-2 rounded-md absolute -top-6 left-4 font-bold'>
-            의뢰 이미지
-          </p>
-          {/* <p className='whitespace-nowrap w-20 font-bold text-sm md:text-base'>
-            의뢰 이미지
-          </p> */}
-          <div className='flex justify-center w-full'>
-            <img
-              src={selectedItem.productImgPath}
-              alt='회원 업로드 이미지'
-              className='w-60 h-48 object-cover'
-            />
-          </div>
-        </div>
-        {/* <div className='flex gap-10 border-b border-gray-300 py-10 items-center'>
-          <p className='whitespace-nowrap w-20 font-bold text-sm md:text-base'>
-            동일 기자재
-          </p>
-          <div className='flex justify-center w-full'>
-            {selectedItem.matchingKcImgUrl ? (
-              <img
-                src={selectedItem.matchingKcImgUrl}
-                alt='동일 기자재 이미지'
-                className='w-60 h-48 object-cover'
-              />
-            ) : (
-              <div className='w-60 h-48 bg-gray-200 flex items-center justify-center'>
-                <p className='text-gray-500'>매칭된 기자재 없음</p>
-              </div>
-            )}
-          </div>
-        </div> */}
 
-        <div className='flex gap-10 border-blue-50 items-center border-4 rounded-2xl p-4 relative'>
+      <div className='mb-10'>
+        <div className='border-blue-50 border-4 rounded-2xl p-4 relative mb-10'>
           <p className='bg-white p-2 rounded-md absolute -top-6 left-4 font-bold'>
-            동일 기자재
+            의뢰 이미지
           </p>
-          <div className='flex justify-center w-full'>
-            {selectedItem.matchingKcImgUrl ? (
-              <img
-                src={selectedItem.matchingKcImgUrl}
-                alt='동일 기자재 이미지'
-                className='w-60 h-48 object-cover'
-              />
-            ) : (
-              <div className='w-60 h-48 bg-gray-200 flex items-center justify-center'>
-                <p className='text-gray-500'>매칭된 기자재 없음</p>
+
+          <div className='flex gap-6'>
+            <div className='flex-1 flex justify-center'>
+              {mainRequestImage ? (
+                <img
+                  src={mainRequestImage}
+                  alt='회원 업로드 이미지'
+                  className='w-80 h-64 object-cover rounded-lg border'
+                />
+              ) : (
+                <div className='w-80 h-64 bg-gray-200 flex items-center justify-center rounded-lg'>
+                  <p className='text-gray-500'>이미지 없음</p>
+                </div>
+              )}
+            </div>
+
+            {selectedItem.productImgPath.length > 1 && (
+              <div className='flex flex-col gap-2 overflow-y-auto max-h-64'>
+                {selectedItem.productImgPath.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`의뢰 썸네일 ${idx + 1}`}
+                    className={`w-20 h-20 object-cover rounded-md cursor-pointer border 
+                      ${mainRequestImage === img ? 'border-blue-500' : 'border-gray-300'}`}
+                    onClick={() => setMainRequestImage(img)}
+                  />
+                ))}
               </div>
             )}
           </div>
         </div>
-        <div className='flex gap-10 border-b border-gray-300 py-10 items-center'>
-          <p className='font-bold w-20 text-sm md:text-base'>인증번호</p>
-          <p>{selectedItem.kcCertificationNum || '동일 기자재 검색 중 ...'}</p>
-        </div>
-        <div className='flex gap-10 border-b border-gray-300 py-10 items-center'>
-          <p className='font-bold w-20 text-sm md:text-base'>링크</p>
-          <p>
-            {selectedItem.matchingProductLink ? (
-              <a
-                href={selectedItem.matchingProductLink}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-blue-600 hover:underline'
-              >
-                {selectedItem.matchingProductLink}
-              </a>
-            ) : (
-              '링크 없음'
-            )}
+
+        <div className='border-blue-50 border-4 rounded-2xl p-4 relative mb-10'>
+          <p className='bg-white p-2 rounded-md absolute -top-6 left-4 font-bold'>
+            동일 기자재 이미지
           </p>
+
+          <div className='flex gap-6'>
+            <div className='flex-1 flex justify-center'>
+              {mainMatchingImage ? (
+                <img
+                  src={mainMatchingImage}
+                  alt='동일 기자재 이미지'
+                  className='w-80 h-64 object-cover rounded-lg border'
+                />
+              ) : (
+                <div className='w-80 h-64 bg-gray-200 flex items-center justify-center rounded-lg'>
+                  <p className='text-gray-500'>매칭된 기자재 없음</p>
+                </div>
+              )}
+            </div>
+
+            {Array.isArray(selectedItem.matchingKcImgUrl) &&
+              selectedItem.matchingKcImgUrl.length > 1 && (
+                <div className='flex flex-col gap-2 overflow-y-auto max-h-64'>
+                  {selectedItem.matchingKcImgUrl.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt={`동일 기자재 썸네일 ${idx + 1}`}
+                      className={`w-20 h-20 object-cover rounded-md cursor-pointer border 
+                        ${mainMatchingImage === img ? 'border-blue-500' : 'border-gray-300'}`}
+                      onClick={() => setMainMatchingImage(img)}
+                    />
+                  ))}
+                </div>
+              )}
+          </div>
         </div>
       </div>
     </>

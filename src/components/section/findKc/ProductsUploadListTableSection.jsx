@@ -1,29 +1,38 @@
 import { useState, useEffect } from 'react';
 import PageHeader from '../../ui/PageHeader';
-import { productsUploadList } from '../../../constants/productsUploadList';
 import Pagination from '../../ui/Pagination';
 
-export default function ProductsUploadListTableSection({ onItemSelect }) {
+export default function ProductsUploadListTableSection({
+  onItemSelect,
+  productsUploadList = [], // 안전장치
+}) {
   const validItems = productsUploadList.filter(
     item => item.kcCertificationNum && item.kcCertificationNum.trim() !== '',
   );
+  console.log('🚀 ~ ProductsUploadListTableSection ~ validItems:', validItems);
 
   const [selectedItemId, setSelectedItemId] = useState(
-    validItems[0]?.id || null,
+    validItems[0]?.productCode || null,
   );
 
   useEffect(() => {
-    // 컴포넌트가 처음 마운트될 때만 첫 번째 아이템을 선택
-    if (validItems.length > 0 && onItemSelect) {
+    if (validItems.length > 0 && onItemSelect && selectedItemId === null) {
       onItemSelect(validItems[0]);
-      setSelectedItemId(validItems[0].id);
+      setSelectedItemId(validItems[0].productCode);
     }
-  }, []); // 빈 의존성 배열로 마운트 시에만 실행
+  }, [validItems, onItemSelect, selectedItemId]);
 
   const handleRowClick = item => {
-    console.log('클릭된 아이템:', item);
-    setSelectedItemId(item.id);
+    setSelectedItemId(item.productCode);
     onItemSelect(item);
+  };
+
+  const formatDate = date => {
+    return new Date(date).toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
   };
 
   return (
@@ -42,11 +51,11 @@ export default function ProductsUploadListTableSection({ onItemSelect }) {
           {productsUploadList.map(item => {
             const hasValidCertification =
               item.kcCertificationNum && item.kcCertificationNum.trim() !== '';
-            const isSelected = selectedItemId === item.id;
+            const isSelected = selectedItemId === item.productCode;
 
             return (
               <tr
-                key={item.id}
+                key={item.productCode}
                 className={`border-b border-gray-300 transition-colors ${
                   hasValidCertification
                     ? `cursor-pointer ${isSelected ? 'bg-blue-50' : ''}`
@@ -54,10 +63,10 @@ export default function ProductsUploadListTableSection({ onItemSelect }) {
                 }`}
                 onClick={() => hasValidCertification && handleRowClick(item)}
               >
-                <td className='py-4 px-2 text-center'>{item.id}</td>
+                <td className='py-4 px-2 text-center'>{item.productCode}</td>
                 <td className='flex justify-center px-4 truncate max-w-[200px] md:max-w-full py-2'>
                   <img
-                    src={item.productImgPath}
+                    src={item.productImgPath[0]}
                     alt='이미지'
                     className='w-10 h-10 object-cover md:w-20 md:h-20'
                   />
@@ -65,9 +74,8 @@ export default function ProductsUploadListTableSection({ onItemSelect }) {
                 <td className='text-center px-4 whitespace-nowrap max-w-[100px] truncate'>
                   {item.kcCertificationNum || '검색 중'}
                 </td>
-
                 <td className='text-center px-2 whitespace-nowrap'>
-                  {item.date}
+                  {formatDate(item.createDate)}
                 </td>
               </tr>
             );

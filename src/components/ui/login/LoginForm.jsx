@@ -8,8 +8,6 @@ import { API_BASE_URL } from '../../../apiConfig';
 export default function LoginForm() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const path = '/auth';
-  const title = '로그인';
 
   const [formData, setFormData] = useState({
     userId: '',
@@ -25,7 +23,7 @@ export default function LoginForm() {
   };
 
   const handleSubmit = async e => {
-    e.preventDefault(); // 페이지 새로고침 방지
+    e.preventDefault();
 
     if (!formData.userId || !formData.userPassword) {
       alert('아이디와 비밀번호를 모두 입력해주세요.');

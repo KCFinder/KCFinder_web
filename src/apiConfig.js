@@ -1,5 +1,5 @@
 // 개발 환경 (로컬)
-const DEVELOPMENT_API_BASE_URL = 'http://localhost:8080';
+const DEVELOPMENT_API_BASE_URL = 'http://localhost:8000';
 
 // 배포 환경 (실제 서버)
 const PRODUCTION_API_BASE_URL = 'https://api.yourdomain.com'; // 실제 배포될 도메인으로 변경하세요
