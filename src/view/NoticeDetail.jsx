@@ -70,15 +70,15 @@ export default function NoticeDetail() {
 
           {!loading && !err && detail && (
             <article>
-              <div className='flex items-center justify-between border-b border-gray-300 pb-2'>
-                <p className='text-lg font-bold px-4'>
+              <div className='flex flex-col md:flex-row justify-between border-b border-gray-300 pb-2'>
+                <p className='md:text-lg font-bold whitespace-nowrap'>
                   {detail.title ?? '제목'}
                 </p>
-                <div className='flex gap-2 px-4 text-sm text-gray-500'>
+                <div className='flex gap-2 text-sm text-gray-500'>
                   <p>{formatDate(detail.create_date ?? detail.date ?? '')}</p>
                 </div>
               </div>
-              <div className='px-4 pt-6'>
+              <div className='pt-6'>
                 <div />
                 {detail.content ?? detail.contents ?? ''}
               </div>
