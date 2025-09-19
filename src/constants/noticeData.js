@@ -2,21 +2,29 @@ export const noticeData = [
   {
     id: 10,
     title: '[안내] 2024년 2월 시스템 정기점검 일정 안내',
+    content: '내용',
+    writer: '개발자',
     date: '2024.02.15',
   },
   {
     id: 9,
     title: '[업데이트] KC인증 검색 기능 개선 안내',
+    content: '내용',
+    writer: '개발자',
     date: '2024.02.12',
   },
   {
     id: 8,
     title: '[안내] 케이씨파인더 서비스 이용 가이드',
+    content: '내용',
+    writer: '개발자',
     date: '2024.02.08',
   },
   {
     id: 7,
     title: '[점검] 시스템 긴급 점검으로 인한 서비스 일시 중단 안내',
+    content: '내용',
+    writer: '개발자',
     date: '2024.02.05',
   },
   {

@@ -21,7 +21,7 @@ export default function Login() {
           <div className='max-w-[320px] w-full'>
             <PageHeader title='로그인' />
             <LoginForm />
-            <SnsLoginButton />
+            {/* <SnsLoginButton /> */}
             <button
               onClick={handleSignUp}
               className='w-full py-3 text-white bg-primary-100 rounded-md  mt-5'

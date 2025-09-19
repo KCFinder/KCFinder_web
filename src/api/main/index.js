@@ -23,3 +23,29 @@ export const uploadProductFiles = async fileData => {
   );
   return response.data;
 };
+
+export const getNoticeList = async page => {
+  const response = await axios.get(
+    `${API_BASE_URL}/api/v1/notice/list/${page}`,
+  );
+  if (response.data.code === 1) {
+    return response.data.data;
+  }
+  if (response.data.code === -1) {
+    return response.data;
+  }
+};
+
+export const getNoticeDetail = async noticeId => {
+  console.log('🚀 ~ getNoticeDetail ~ noticeId:', noticeId);
+  const response = await axios.get(
+    `${API_BASE_URL}/api/v1/notice/detail/${noticeId}`,
+  );
+  console.log('🚀 ~ getNoticeDetail ~ response:', response);
+  if (response.data.code === 1) {
+    return response.data;
+  }
+  if (response.data.code === -1) {
+    return response.data;
+  }
+};
