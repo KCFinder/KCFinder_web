@@ -36,8 +36,7 @@ export default function LoginForm() {
         formData,
       );
 
-      const user = response.data;
-      console.log(user);
+      const user = response.data.data;
       login(user);
 
       alert('로그인에 성공했습니다!');

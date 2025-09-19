@@ -36,7 +36,7 @@ export default function ImgUpLoadSection() {
   };
 
   const handleFindKcBtn = async () => {
-    if (uploadedImageUrls.length === 0 || !user) {
+    if (uploadedImageUrls.length === 0 || !isAuthenticated) {
       alert('이미지를 먼저 업로드하고 로그인해주세요.');
       return;
     }

@@ -7,7 +7,6 @@ export default function MobileMenuButton({ className, menuType = 'main' }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
-    console.log('햄버거 버튼 클릭됨');
     setIsOpen(true);
   };
 

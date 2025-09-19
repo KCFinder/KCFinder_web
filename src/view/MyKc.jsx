@@ -3,17 +3,18 @@ import SectionWrapper from '../wrapper/SectionWrapper';
 import MenuBox from '../components/ui/MenuBox';
 import PageHeader from '../components/ui/PageHeader';
 import ContentsWrapper from '../wrapper/ContentsWrapper';
-import ResultSection from '../components/section/findKc/ResultSection';
-import ProductsUploadListTableSection from '../components/section/findKc/ProductsUploadListTableSection';
+import FindMyKcResultSection from '../components/section/myKc/FindMyKcResultSection';
+import MyKCTableSection from '../components/section/myKc/MyKCTableSection';
 import { findMyKc } from '../api/myKc';
 import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyKc() {
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
-  const { user } = useAuth();
-  console.log('🚀 ~ MyKc ~ userData:', user);
+  const { user, isAuthenticated, loading } = useAuth();
+  const navigate = useNavigate();
 
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -24,14 +25,18 @@ export default function MyKc() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
+    if (loading) return;
+    if (!isAuthenticated) {
+      alert('로그인 후 이용 가능한 서비스입니다.');
+      navigate('/login');
+      return;
+    }
     let cancel = false;
     const fetchProductsUploadList = async () => {
       try {
-        console.log('FindKc 페이지 로드');
-        const response = await findMyKc(user.data, page);
+        const response = await findMyKc(user, page);
+        console.log('🚀 ~ fetchProductsUploadList ~ response:', response);
         if (cancel) return;
-
-        console.log('API 응답:', response);
 
         setPagination({
           currentPage: response.data.pagination.currentPage,
@@ -47,7 +52,7 @@ export default function MyKc() {
     return () => {
       cancel = true;
     };
-  }, [page]);
+  }, [page, loading, user]);
 
   const validItems = productsUploadList.filter(
     item => item.kcCertificationNum && item.kcCertificationNum.trim() !== '',
@@ -56,6 +61,9 @@ export default function MyKc() {
   useEffect(() => {
     if (validItems.length > 0 && !selectedItem) {
       setSelectedItem(validItems[0]);
+    }
+    if (validItems.length === 0) {
+      setSelectedItem(null);
     }
   }, [validItems, selectedItem]);
 
@@ -68,11 +76,15 @@ export default function MyKc() {
       <div className='flex gap-20'>
         <MenuBox menuType='services' />
         <ContentsWrapper>
-          <PageHeader title='동일 기자재 찾기' />
-          <ResultSection selectedItem={selectedItem} />
-          <ProductsUploadListTableSection
+          <PageHeader title='나의 기자재 찾기' />
+          <FindMyKcResultSection
+            selectedItem={selectedItem}
+            validItems={validItems}
+          />
+          <MyKCTableSection
             onItemSelect={handleItemSelect}
             productsUploadList={productsUploadList}
+            totalPage={pagination.totalPage}
           />
         </ContentsWrapper>
       </div>
