@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../../ui/PageHeader';
 
-export default function ResultSection({ selectedItem }) {
+export default function ResultSection({ selectedItem, validItems }) {
   const [mainRequestImage, setMainRequestImage] = useState(null);
   const [mainMatchingImage, setMainMatchingImage] = useState(null);
 

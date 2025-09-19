@@ -4,12 +4,12 @@ import Pagination from '../../ui/Pagination';
 
 export default function ProductsUploadListTableSection({
   onItemSelect,
-  productsUploadList = [], // 안전장치
+  productsUploadList = [],
+  totalPage,
 }) {
   const validItems = productsUploadList.filter(
     item => item.kcCertificationNum && item.kcCertificationNum.trim() !== '',
   );
-  console.log('🚀 ~ ProductsUploadListTableSection ~ validItems:', validItems);
 
   const [selectedItemId, setSelectedItemId] = useState(
     validItems[0]?.productCode || null,
@@ -41,7 +41,7 @@ export default function ProductsUploadListTableSection({
       <table className='w-full text-sm md:text-base'>
         <thead className='text-primary-100 border-b-2 border-gray-500'>
           <tr className='text-primary-100'>
-            <th className='py-4'>순번</th>
+            <th className='py-4'>상품번호</th>
             <th className='py-4'>이미지</th>
             <th className='py-4'>인증번호</th>
             <th className='py-4'>등록일</th>
@@ -82,7 +82,7 @@ export default function ProductsUploadListTableSection({
           })}
         </tbody>
       </table>
-      <Pagination totalPage={12} />
+      <Pagination totalPage={totalPage} />
     </>
   );
 }

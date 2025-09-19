@@ -13,6 +13,7 @@ import MyKc from './view/MyKc';
 import Notice from './view/Notice';
 import Guide from './view/Guide';
 import Header from './layout/header/Header';
+import NoticeDetail from './view/NoticeDetail';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path='/my/finder' element={<MyKc />} />
           <Route path='/notice' element={<Notice />} />
           <Route path='/services/guide' element={<Guide />} />
+          <Route path='/notice/:id' element={<NoticeDetail />} />
         </Routes>
       </GlobalLayout>
     </AuthProvider>

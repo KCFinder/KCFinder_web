@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../../ui/PageHeader';
 
-export default function FindMyKcResultSection({ selectedItem }) {
+export default function FindMyKcResultSection({ selectedItem, validItems }) {
   const [mainRequestImage, setMainRequestImage] = useState(null);
   const [mainMatchingImage, setMainMatchingImage] = useState(null);
 
@@ -23,6 +23,17 @@ export default function FindMyKcResultSection({ selectedItem }) {
       setMainMatchingImage(null);
     }
   }, [selectedItem]);
+
+  if (validItems.length === 0) {
+    return (
+      <>
+        <PageHeader title='결과' className='text-black-100' />
+        <div className='flex items-center justify-center py-20'>
+          <p className='text-gray-500 text-lg'>매칭상품이 없습니다.</p>
+        </div>
+      </>
+    );
+  }
 
   if (!selectedItem) {
     return (

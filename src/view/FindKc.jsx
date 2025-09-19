@@ -24,11 +24,8 @@ export default function FindKc() {
     let cancel = false;
     const fetchProductsUploadList = async () => {
       try {
-        console.log('FindKc 페이지 로드');
         const response = await findKc(page);
         if (cancel) return;
-
-        console.log('API 응답:', response);
 
         setPagination({
           currentPage: response.data.pagination.currentPage,
@@ -70,6 +67,7 @@ export default function FindKc() {
           <ProductsUploadListTableSection
             onItemSelect={handleItemSelect}
             productsUploadList={productsUploadList}
+            totalPage={pagination.totalPage}
           />
         </ContentsWrapper>
       </div>

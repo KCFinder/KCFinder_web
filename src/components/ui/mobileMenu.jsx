@@ -55,7 +55,7 @@ export default function MobileMenu({ isOpen, onClose }) {
           {isAuthenticated ? (
             <>
               <h2 className='text-lg font-semibold text-white'>
-                {user.name}회원님 안녕하세요!
+                회원님 안녕하세요!
               </h2>
               <button
                 className='text-sm text-white underline'

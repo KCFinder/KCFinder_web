@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_BASE_URL } from '../../../apiConfig';
+import { signIn } from '../../../api/user';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -31,29 +30,27 @@ export default function LoginForm() {
     }
 
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/api/user/signin`,
-        formData,
-      );
+      const response = await signIn(formData);
 
-      const user = response.data;
-      console.log(user);
-      login(user);
-
-      alert('로그인에 성공했습니다!');
-      navigate('/');
+      if (response.code === 1) {
+        login(response.data);
+        alert('로그인에 성공했습니다!');
+        navigate('/');
+      }
+      if (response.code === -1) {
+        alert(
+          response.message ||
+            response.data?.message ||
+            '아이디 또는 비밀번호가 올바르지 않습니다.',
+        );
+      }
     } catch (error) {
-      console.error('로그인 실패:', error);
       if (error.response) {
-        alert(
-          `로그인 실패: ${error.response.data.message || '아이디 또는 비밀번호가 올바르지 않습니다.'}`,
-        );
+        alert(error.response.data?.message || '서버에서 오류가 발생했습니다.');
       } else if (error.request) {
-        alert(
-          '로그인 실패: 서버에 연결할 수 없습니다. CORS 설정을 확인해주세요.',
-        );
+        alert('서버에 연결할 수 없습니다. CORS 설정을 확인해주세요.');
       } else {
-        alert('로그인 실패: 알 수 없는 오류가 발생했습니다.');
+        alert('알 수 없는 오류가 발생했습니다.');
       }
     }
   };
@@ -72,6 +69,7 @@ export default function LoginForm() {
         className='w-full p-2 border border-gray-300 rounded-md'
         onChange={handleChange}
       />
+
       <label htmlFor='password'>
         <p>비밀번호</p>
       </label>

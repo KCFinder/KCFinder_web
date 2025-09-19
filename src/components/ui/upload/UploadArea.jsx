@@ -17,7 +17,7 @@ export default function UploadArea({
       className={cn(
         'flex items-center justify-center',
         'border-dashed border-2 border-gray-400 rounded-2xl',
-        'w-full max-w-[996px] h-[300px] mx-auto',
+        'w-full max-w-[996px] h-[300px] max-h-[300px] mx-auto',
         isDragging && 'border-primary-100 bg-primary-50',
         loading && 'opacity-50',
       )}
@@ -27,15 +27,15 @@ export default function UploadArea({
       onDrop={onDrop}
       onClick={onClick}
     >
-      <div className='flex flex-col gap-5 items-center'>
+      <div className='flex flex-col gap-5 items-center relative'>
         {uploadedImages.length > 0 ? (
-          <div className='flex gap-2 flex-wrap justify-center'>
+          <div className='flex gap-2 flex-wrap justify-center max-w-[500px] overflow-hidden'>
             {uploadedImages.map((url, index) => (
               <img
                 key={index}
                 src={url}
                 alt={`업로드된 이미지 ${index + 1}`}
-                className='w-60 h-60 object-cover rounded'
+                className='w-20 h-20 md:max-w-60 md:max-h-60 object-cover rounded'
               />
             ))}
           </div>
