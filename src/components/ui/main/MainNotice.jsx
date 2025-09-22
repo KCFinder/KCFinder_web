@@ -8,7 +8,6 @@ export default function MainNotice() {
   useEffect(() => {
     const fetchNoticeList = async () => {
       const response = await getNoticeList(1);
-      console.log('🚀 ~ fetchNoticeList ~ response123:', response);
       setNoticeList(response.items);
     };
     fetchNoticeList();

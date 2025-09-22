@@ -10,6 +10,7 @@ import UploadButton from '../../ui/upload/UploadButton';
 export default function ImgUpLoadSection() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
+  console.log('🚀 ~ ImgUpLoadSection ~ user:', user);
   const fileInputRef = useRef(null);
 
   const {
@@ -43,7 +44,7 @@ export default function ImgUpLoadSection() {
 
     const firstFile = uploadedFiles[0];
     const uploadProductData = {
-      userCode: user.data,
+      userCode: user,
       productName: firstFile.name,
     };
 
