@@ -129,8 +129,8 @@ export default function ResultSection({ selectedItem, validItems }) {
         {/* 링크 섹션 - border 바깥에 위치 */}
         {selectedItem.matchingProductLink && (
           <div className='flex flex-col gap-2 mb-10'>
-            <div className='flex items-center gap-2'>
-              <p className='font-bold'>링크:</p>
+            <div className='flex items-start gap-2'>
+              <p className='font-bold whitespace-nowrap'>링크:</p>
               <a
                 href={selectedItem.matchingProductLink}
                 target='_blank'
