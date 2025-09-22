@@ -1,4 +1,5 @@
 import footerLogo from '../../asset/logo/footerLogo.svg';
+
 export default function Footer() {
   return (
     <footer className='bg-gray-700 py-12'>

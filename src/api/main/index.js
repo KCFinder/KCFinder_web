@@ -8,6 +8,7 @@ export const getMain = async () => {
 
 // 제품 업로드 API
 export const uploadProduct = async productData => {
+  console.log('🚀 ~ uploadProduct ~ productData:', productData);
   const response = await axios.post(
     `${API_BASE_URL}/api/product/upload`,
     productData,
@@ -37,11 +38,9 @@ export const getNoticeList = async page => {
 };
 
 export const getNoticeDetail = async noticeId => {
-  console.log('🚀 ~ getNoticeDetail ~ noticeId:', noticeId);
   const response = await axios.get(
     `${API_BASE_URL}/api/v1/notice/detail/${noticeId}`,
   );
-  console.log('🚀 ~ getNoticeDetail ~ response:', response);
   if (response.data.code === 1) {
     return response.data;
   }
