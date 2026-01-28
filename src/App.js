@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Login from './view/Login';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -14,8 +15,17 @@ import Notice from './view/Notice';
 import Guide from './view/Guide';
 import Header from './layout/header/Header';
 import NoticeDetail from './view/NoticeDetail';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+    });
+  }, []);
   return (
     <AuthProvider>
       <Header />

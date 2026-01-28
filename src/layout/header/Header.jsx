@@ -8,7 +8,7 @@ export default function Header() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <header className='fixed top-10 z-[1000] bg-white left-1/2 transform -translate-x-1/2 shadow-md w-full max-w-[1440px] rounded-full'>
+    <header className='fixed md:top-6 z-[1000] bg-white left-1/2 transform -translate-x-1/2 shadow-md w-full max-w-[1440px] md:rounded-full'>
       <div className='w-full max-w-[1280px] mx-auto'>
         <div className='flex justify-center items-center'>
           <Nav isAuthenticated={isAuthenticated} />

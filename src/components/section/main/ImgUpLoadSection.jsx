@@ -84,9 +84,12 @@ export default function ImgUpLoadSection() {
   };
 
   return (
-    <SectionWrapper className='py-12'>
-      <div className='grid grid-cols-2 gap-6 '>
-        <div className='flex flex-col gap-5 items-center bg-yellow-200 p-4 rounded-2xl shadow-md'>
+    <SectionWrapper className='md:py-12'>
+      <div className='flex flex-col md:grid grid-cols-2 gap-6 '>
+        <div
+          data-aos='fade-right'
+          className='flex flex-col gap-5 items-center bg-yellow-200 p-4 rounded-2xl shadow-md'
+        >
           <p className='font-bold text-lg text-left w-full'>
             이미지로 동일 기자재 찾기
           </p>
@@ -126,7 +129,11 @@ export default function ImgUpLoadSection() {
           </UploadButton>
         </div>
 
-        <section className='col-span-1 flex flex-col justify-start items-start p-6 bg-yellow-200 rounded-2xl shadow-md w-full'>
+        <section
+          data-aos='fade-left'
+          data-aos-delay='200'
+          className='col-span-1 flex flex-col justify-start items-start p-6 bg-yellow-200 rounded-2xl shadow-md w-full'
+        >
           <p className='font-bold text-xl text-left w-full mb-4'>
             동일기자재 목록
           </p>
@@ -135,11 +142,13 @@ export default function ImgUpLoadSection() {
             <table className='w-full border-collapse'>
               <thead>
                 <tr className='border-y border-gray-400'>
-                  <th className='px-4 py-3 text-center font-semibold'>순번</th>
-                  <th className='px-4 py-3 text-center font-semibold'>
+                  <th className='px-4 py-3 text-center font-semibold whitespace-nowrap'>
+                    순번
+                  </th>
+                  <th className='px-4 py-3 text-center font-semibold whitespace-nowrap'>
                     인증번호
                   </th>
-                  <th className='px-4 py-3 text-center font-semibold'>
+                  <th className='px-4 py-3 text-center font-semibold whitespace-nowrap'>
                     등록일
                   </th>
                 </tr>
@@ -148,24 +157,26 @@ export default function ImgUpLoadSection() {
                 {kcList.length > 0
                   ? kcList.map((kcItem, index) => (
                       <tr key={kcItem.id} className='border-b border-gray-300'>
-                        <td className='px-4 py-3 text-center'>{index + 1}</td>
-                        <td className='px-4 py-3 text-center'>
+                        <td className='px-4 py-3 text-center whitespace-nowrap'>
+                          {index + 1}
+                        </td>
+                        <td className='px-4 py-3 text-center whitespace-nowrap'>
                           {kcItem.matchingProductCode || '-'}
                         </td>
-                        <td className='px-4 py-3 text-center'>
-                          {kcItem.createDate || '-'}
+                        <td className='px-4 py-3 text-center whitespace-nowrap'>
+                          {kcItem.createDate?.split(' ')[0] || '-'}
                         </td>
                       </tr>
                     ))
                   : Array.from({ length: 5 }).map((_, index) => (
                       <tr key={index} className='border-b border-gray-300'>
-                        <td className='px-4 py-3 text-center text-gray-400'>
+                        <td className='px-4 py-3 text-center text-gray-400 whitespace-nowrap'>
                           {index + 1}
                         </td>
-                        <td className='px-4 py-3 text-center text-gray-400'>
+                        <td className='px-4 py-3 text-center text-gray-400 whitespace-nowrap'>
                           -
                         </td>
-                        <td className='px-4 py-3 text-center text-gray-400'>
+                        <td className='px-4 py-3 text-center text-gray-400 whitespace-nowrap'>
                           -
                         </td>
                       </tr>
