@@ -26,14 +26,14 @@ export default function Nav({ isAuthenticated }) {
   return (
     <div
       className='w-full m-0 h-20 justify-center items-center text-center hidden md:flex'
-      onMouseLeave={handleMouseLeave}
+      // onMouseLeave={handleMouseLeave}
     >
-      <nav className='grid grid-cols-4 gap-6 items-center w-full max-w-[1200px]'>
+      <nav className='grid grid-cols-4 items-center w-full max-w-[1280px] mx-auto'>
         <Link to='/'>
           <img
             src={mainLogo}
             alt='logo'
-            className='w-[160px] h-[90px] md:w-[180px] md:h-[50px] mx-5 md:mx-0'
+            className='w-[160px] h-[90px] md:w-[180px] md:h-[50px]'
             style={{ width: '160px', height: '90px' }}
           />
         </Link>
@@ -84,11 +84,11 @@ export default function Nav({ isAuthenticated }) {
           </ul>
         </div>
       </nav>
-      <DropdownMenu
+      {/* <DropdownMenu
         navContent={navContent}
         activeDropdown={activeDropdown}
         setActiveDropdown={setActiveDropdown}
-      />
+      /> */}
     </div>
   );
 }

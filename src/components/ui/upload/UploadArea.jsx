@@ -16,7 +16,7 @@ export default function UploadArea({
     <div
       className={cn(
         'flex items-center justify-center',
-        'border-dashed border-2 border-gray-400 rounded-2xl',
+        'border-dashed border-2 bg-white border-gray-400 rounded-2xl',
         'w-full max-w-[996px] h-[300px] max-h-[300px] mx-auto',
         isDragging && 'border-primary-100 bg-primary-50',
         loading && 'opacity-50',

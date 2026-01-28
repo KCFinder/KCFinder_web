@@ -1,6 +1,7 @@
 import MainWrapper from '../wrapper/MainWrapper';
 import BannerSection from '../components/section/main/BannerSection';
 import ImgUpLoadSection from '../components/section/main/ImgUpLoadSection';
+import AISection from '../components/section/main/AISection';
 import MainBottomSection from '../components/section/main/MainBottomSection';
 
 export default function Main() {
@@ -8,6 +9,7 @@ export default function Main() {
     <MainWrapper>
       <BannerSection />
       <ImgUpLoadSection />
+      <AISection />
       <MainBottomSection />
     </MainWrapper>
   );
