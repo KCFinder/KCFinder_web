@@ -1,5 +1,5 @@
 import SectionWrapper from '../wrapper/SectionWrapper';
-import location from '../asset/img/location.jpg';
+import location from '../asset/img/location2.png';
 import Map from '../asset/icon/map';
 import MenuBox from '../components/ui/MenuBox';
 import PageHeader from '../components/ui/PageHeader';
@@ -20,7 +20,7 @@ export default function Location() {
           <div className='shadow-lg p-5 flex items-center gap-10 mt-10'>
             <Map />
             <p className='text-sm md:text-gray-500 text-center'>
-              부산광역시 동구 초량동 1194-5 205호
+              부산광역시 부산진구 동천로 116
             </p>
           </div>
         </ContentsWrapper>
