@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import navContent from '../../constants/navcontent';
@@ -11,6 +11,18 @@ export default function MobileMenu({ isOpen, onClose }) {
   const navigate = useNavigate();
 
   const { isAuthenticated, user, logout } = useAuth();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!isOpen) {
     return null;
@@ -37,7 +49,7 @@ export default function MobileMenu({ isOpen, onClose }) {
 
   return (
     <div
-      className='fixed inset-0 z-[9999] w-full bg-black-50/50'
+      className='fixed inset-0 z-[9999] w-full bg-black/50'
       onClick={onClose}
     >
       <button
@@ -48,7 +60,7 @@ export default function MobileMenu({ isOpen, onClose }) {
       </button>
 
       <div
-        className='absolute top-0 right-0 w-80 h-full bg-white shadow-2xl'
+        className='absolute top-0 right-0 w-80 h-screen bg-white shadow-2xl'
         onClick={e => e.stopPropagation()}
       >
         <div className='flex items-center justify-between p-4 border-b border-gray-200 bg-primary-100'>
@@ -80,13 +92,13 @@ export default function MobileMenu({ isOpen, onClose }) {
         </div>
 
         {/* 모든 메뉴 표시 */}
-        <div className='space-y-0'>
+        <div>
           {navContent.map(menu => (
             <div key={menu.name}>
               <button
                 onClick={() => handleMenuClick(menu.name)}
                 className={cn(
-                  'w-full flex items-center justify-between p-4 text-left border-b border-gray-200 transition-colors',
+                  'w-full flex items-center justify-between p-4 text-left border-b border-gray-200 transition-colors bg-white',
                   expandedMenu === menu.name && 'text-primary-100',
                 )}
               >
@@ -117,7 +129,7 @@ export default function MobileMenu({ isOpen, onClose }) {
                       key={subItem.name}
                       to={subItem.path}
                       onClick={handleSubMenuClick}
-                      className='block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors border-b border-gray-200'
+                      className='block px-6 py-3 text-gray-600  hover:bg-gray-100 hover:text-gray-800 transition-colors border-b border-gray-200'
                     >
                       {subItem.name}
                     </Link>
