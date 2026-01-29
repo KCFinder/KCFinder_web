@@ -12,7 +12,7 @@ export default function UploadButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'bg-primary-100 text-sm py-2 px-10 font-bold text-white rounded-full',
+        'bg-green-100 text-sm py-2 px-10 font-bold text-white rounded-full',
         ' disabled:cursor-not-allowed',
         className,
       )}

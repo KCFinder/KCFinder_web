@@ -4,7 +4,11 @@ import Email from '../../../asset/icon/Email';
 
 export default function MainContact() {
   return (
-    <div className='flex flex-col gap-4 w-full max-w-[612px] h-[218px] shadow-md p-4 rounded-xl'>
+    <div
+      data-aos='fade-up'
+      data-aos-delay='200'
+      className='flex flex-col gap-4 w-full max-w-[612px] h-[218px] shadow-md p-4 rounded-xl'
+    >
       <p className='text-2xl font-bold text-left w-full'>문의하기</p>
       <div className='flex items-center gap-6'>
         <img

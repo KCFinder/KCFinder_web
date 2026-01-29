@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageHeader from '../../ui/PageHeader';
 
 export default function ResultSection({ selectedItem, validItems }) {
+  console.log('🚀 ~ ResultSection ~ selectedItem:', selectedItem);
   const [mainRequestImage, setMainRequestImage] = useState(null);
   const [mainMatchingImage, setMainMatchingImage] = useState(null);
 
@@ -124,6 +125,27 @@ export default function ResultSection({ selectedItem, validItems }) {
               )}
           </div>
         </div>
+
+        {/* 링크 섹션 - border 바깥에 위치 */}
+        {selectedItem.matchingProductLink && (
+          <div className='flex flex-col gap-2 mb-10'>
+            <div className='flex items-start gap-2'>
+              <p className='font-bold whitespace-nowrap'>링크:</p>
+              <a
+                href={selectedItem.matchingProductLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-blue-600 hover:underline break-all'
+              >
+                {selectedItem.matchingProductLink}
+              </a>
+            </div>
+
+            <p className='font-bold'>
+              인증번호: {selectedItem.kcCertificationNum}
+            </p>
+          </div>
+        )}
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../apiConfig';
 
 export const findMyKc = async (userCode, page) => {
+  console.log('🚀 ~ findMyKc ~ userCode:', userCode);
   const response = await axios.get(
     `${API_BASE_URL}/api/product/list/${userCode}/${page}`,
   );

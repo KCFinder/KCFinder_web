@@ -8,13 +8,15 @@ export default function MainNotice() {
   useEffect(() => {
     const fetchNoticeList = async () => {
       const response = await getNoticeList(1);
-      console.log('🚀 ~ fetchNoticeList ~ response123:', response);
       setNoticeList(response.items);
     };
     fetchNoticeList();
   }, []);
   return (
-    <div className='flex flex-col gap-2 w-full max-w-[612px] h-[218px] shadow-md p-4 rounded-xl'>
+    <div
+      data-aos='fade-up'
+      className='flex flex-col gap-2 w-full max-w-[612px] h-[218px] shadow-md p-4 rounded-xl'
+    >
       <div className='flex justify-between'>
         <p className='text-2xl font-bold text-left w-full border-b border-gray-400 pb-2'>
           공지사항

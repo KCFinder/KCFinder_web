@@ -1,5 +1,4 @@
 import SectionWrapper from '../wrapper/SectionWrapper';
-import { useNavigate } from 'react-router-dom';
 import MenuBox from '../components/ui/MenuBox';
 import PageHeader from '../components/ui/PageHeader';
 import NoticeTable from '../components/ui/notice/NoticeTable';
@@ -7,7 +6,6 @@ import ContentsWrapper from '../wrapper/ContentsWrapper';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Notice() {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
 
