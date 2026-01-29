@@ -4,12 +4,19 @@ import { featureCards } from '../../../constants/mainFlow';
 import { MessageSquareMore } from 'lucide-react';
 
 export default function BannerSection() {
+  const scrollToUploadSection = () => {
+    const section = document.getElementById('img-upload-section');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className='relative w-full mb-60 mt-20 md:mt-0'>
+    <section className='relative w-full mb-0 md:mb-40 mt-16 md:mt-0'>
       <img
         src={KCfinderMainImg}
         alt='banner'
-        className='w-full h-[200px] md:h-[660px] object-cover'
+        className='w-full h-[200px] md:h-[760px] object-cover'
       />
       <div
         className={cn(
@@ -28,14 +35,17 @@ export default function BannerSection() {
         <div
           data-aos='fade-up'
           data-aos-delay='200'
-          className='gap-4 mt-8 hidden md:flex'
+          className='gap-4 mt-20 hidden md:flex'
         >
-          <button className='bg-green-100 text-white px-6 py-3 rounded-full hover:bg-green-100/80 transition-colors'>
-            동일 기자재 찾기 →
-          </button>
-          <button className='bg-transparent flex items-center gap-2 border-2 whitespace-nowrap border-white text-white px-6 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors'>
+          <button
+              onClick={scrollToUploadSection}
+              className='bg-green-100 text-white px-6 py-3 rounded-full hover:bg-green-100/80 transition-colors'
+            >
+              동일 기자재 찾기 →
+            </button>
+          {/* <button className='bg-transparent flex items-center gap-2 border-2 whitespace-nowrap border-white text-white px-6 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors'>
             <MessageSquareMore /> 문의하기
-          </button>
+          </button> */}
         </div>
       </div>
 

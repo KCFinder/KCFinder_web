@@ -84,7 +84,7 @@ export default function ImgUpLoadSection() {
   };
 
   return (
-    <SectionWrapper className='md:py-12'>
+    <SectionWrapper id='img-upload-section' className='md:py-12'>
       <div className='flex flex-col md:grid grid-cols-2 gap-6 '>
         <div
           data-aos='fade-right'

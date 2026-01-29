@@ -132,16 +132,16 @@ export default function VerifyCategorySection() {
           동일 기자재 품목을 알아보고 알맞게 신청하세요.
         </p>
 
-        <div className='flex gap-6'>
+        <div className='flex flex-col md:flex-row gap-6'>
           {/* 왼쪽: 카테고리 카드 */}
           <div
             className={`transition-all duration-500 ease-out ${
-              selectedCategory ? 'w-1/3' : 'w-full'
+              selectedCategory ? 'md:w-1/3 w-full' : 'w-full'
             }`}
           >
             <section
               className={`grid gap-4 transition-all duration-500 ${
-                selectedCategory ? 'grid-cols-1' : 'grid-cols-3'
+                selectedCategory ? 'grid-cols-3 md:grid-cols-1' : 'grid-cols-3'
               }`}
             >
               {categories.map((category, index) => (
@@ -183,7 +183,7 @@ export default function VerifyCategorySection() {
           {/* 오른쪽: 상세 설명 패널 */}
           <div
             className={`overflow-hidden transition-all duration-500 ease-out ${
-              selectedCategory ? 'w-2/3 opacity-100' : 'w-0 opacity-0'
+              selectedCategory ? 'w-full md:w-2/3 opacity-100' : 'w-0 opacity-0'
             }`}
           >
             {selectedCategory && (
