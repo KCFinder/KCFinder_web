@@ -16,13 +16,14 @@ export default function Footer() {
         <ul className='flex items-center gap-4 text-gray-500 text-sm px-5 md:px-0'>
           <li>
             <p>
-                케이씨파인더
+                주식회사 디와프
               <br className='md:hidden' />
-              ㅣ 대표 : 이현민
+              ㅣ 대표 : 최연호
               <br className='md:hidden' />
               ㅣ 대표번호 : 010-3300-4698
               <br />
-              ㅣ 부산광역시 부산진구 동천로116
+              ㅣ 부산광역시 부산진구 동천로 109, 9층 930호(부전동,
+              삼한골든게이트)
               <br className='md:hidden' />
                | 이메일 : yeonho4698@gmail.com
             </p>

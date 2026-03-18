@@ -74,7 +74,7 @@ export default function MyKc() {
   return (
     <SectionWrapper>
       <div className='flex gap-20'>
-        <MenuBox menuType='services' />
+        <MenuBox menuType='my/finder' />
         <ContentsWrapper>
           <PageHeader title='나의 기자재 찾기' />
           <FindMyKcResultSection
